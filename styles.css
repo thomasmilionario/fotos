@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.explosion {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 165, 0, 0.8); /* Cor da explosão */
+    border-radius: 50%;
+    pointer-events: none; /* Para que não capture cliques */
+    transform: translate(-50%, -50%); /* Centralizar a explosão */
+    animation: explode-animation 0.6s forwards; /* Chama a animação */
+}
+
+@keyframes explode-animation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(3); /* Expande para 3x */
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(5); /* Expande para 5x */
+        opacity: 0; /* Desaparece */
+    }
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.photo {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    border: 3px solid transparent;
+    overflow: hidden;
+    position: relative;
+}
+
+.photo img {
+    border-radius: 12px; /* Para garantir que a imagem também tenha borda arredondada */
+    width: 100%;
+    height: auto;
+}
+
+.photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border-color: #4f46e5; /* Cor da borda ao passar o mouse */
+}
+
+.photo:nth-child(odd) {
+    border-color: #3b82f6; /* Azul para fotos ímpares */
+}
+
+.photo:nth-child(even) {
+    border-color: #10b981; /* Verde para fotos pares */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+.overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px; /* Borda arredondada para a imagem no overlay */
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none; /* Para que não capture cliques quando escondida */
+}
